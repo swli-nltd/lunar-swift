@@ -4,11 +4,12 @@
 //
 //  Created by 睿宁 on 2022/7/19.
 //
-/// Episode
+// Episode
 
+@available(watchOS 8.0, *)
 @available(iOS 15.0, *)
 @available(macOS 12.0, *)
-public struct DaYun {
+public struct DaYun: Hashable {
     /// 开始年(含)
     public var startYear: Int = 0
     
@@ -41,6 +42,7 @@ public struct DaYun {
     public init(yun: Yun, index: Int) {
         self.yun = yun
         self.index = index
+        calcProperties(yun: yun, index: index)
     }
     
     mutating func calcProperties(yun: Yun, index: Int) {
@@ -89,6 +91,16 @@ public struct DaYun {
             offset += size
         }
         return LunarUtil.JIA_ZI[offset];
+    }
+    
+    public func getGan() -> String {
+        let characters = Array(getGanZhi())
+        return String(characters[0])
+    }
+    
+    public func getZhi() -> String {
+        let characters = Array(getGanZhi())
+        return String(characters[1])
     }
     
     public func getXun() -> String {

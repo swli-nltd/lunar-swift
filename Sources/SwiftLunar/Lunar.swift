@@ -1,9 +1,10 @@
 import Foundation
 // 阴历日期
 
+@available(watchOS 8.0, *)
 @available(iOS 15.0, *)
 @available(macOS 12.0, *)
-public struct Lunar {
+public struct Lunar: Hashable {
     static let JIE_QI_IN_USE: [String] = [
         "DA_XUE",
         "冬至",
@@ -365,7 +366,7 @@ public struct Lunar {
         return "\(getYearGanByLiChun())\(getYearZhiByLiChun())"
     }
     
-    func getYearInGanZhiExact() -> String {
+    public func getYearInGanZhiExact() -> String {
         return "\(getYearGanExact())\(getYearZhiExact())"
     }
     
@@ -373,7 +374,7 @@ public struct Lunar {
         return "\(getMonthGan())\(getMonthZhi())"
     }
     
-    func getMonthInGanZhiExact() -> String {
+    public func getMonthInGanZhiExact() -> String {
         return "\(getMonthGanExact())\(getMonthZhiExact())"
     }
     
@@ -397,11 +398,11 @@ public struct Lunar {
         return "\(getDayGan())\(getDayZhi())"
     }
     
-    func getDayInGanZhiExact() -> String {
+    public func getDayInGanZhiExact() -> String {
         return "\(getDayGanExact())\(getDayZhiExact())"
     }
     
-    func getDayInGanZhiExact2() -> String {
+    public func getDayInGanZhiExact2() -> String {
         return "\(getDayGanExact2())\(getDayZhiExact2())"
     }
     
@@ -1233,7 +1234,7 @@ public struct Lunar {
         return jieQi
     }
     
-    func getNextJie(wholeDay: Bool = false) -> JieQi {
+    public func getNextJie(wholeDay: Bool = false) -> JieQi {
         let l: Int = (Lunar.JIE_QI_IN_USE.count / 2)
         var conditions: [String] = []
         for i in 0..<l {
@@ -1242,7 +1243,7 @@ public struct Lunar {
         return getNearJieQi(isGoWith: true, conditions: conditions, wholeDay: wholeDay)!
     }
     
-    func getPrevJie(wholeDay: Bool = false) -> JieQi {
+    public func getPrevJie(wholeDay: Bool = false) -> JieQi {
         let l: Int = Int(Lunar.JIE_QI_IN_USE.count / 2)
         var conditions: [String] = []
         for i in 0..<l {
@@ -1251,7 +1252,7 @@ public struct Lunar {
         return getNearJieQi(isGoWith: false, conditions: conditions, wholeDay: wholeDay)!
     }
     
-    func getNextQi(wholeDay: Bool = false) -> JieQi {
+    public func getNextQi(wholeDay: Bool = false) -> JieQi {
         let l: Int = Int(floor(Double(Lunar.JIE_QI_IN_USE.count) / 2))
         var conditions: [String] = []
         for i in 0..<l {
@@ -1260,7 +1261,7 @@ public struct Lunar {
         return getNearJieQi(isGoWith: true, conditions: conditions, wholeDay: wholeDay)!
     }
     
-    func getPrevQi(wholeDay: Bool = false) -> JieQi {
+    public func getPrevQi(wholeDay: Bool = false) -> JieQi {
         let l: Int = Int(floor(Double(Lunar.JIE_QI_IN_USE.count) / 2))
         var conditions: [String] = []
         for i in 0..<l {
@@ -1269,15 +1270,15 @@ public struct Lunar {
         return getNearJieQi(isGoWith: false, conditions: conditions, wholeDay: wholeDay)!
     }
     
-    func getNextJieQi(bool wholeDay: Bool = false) -> JieQi {
+    public func getNextJieQi(bool wholeDay: Bool = false) -> JieQi {
         return getNearJieQi(isGoWith: true, conditions: nil, wholeDay: wholeDay)!
     }
     
-    func getPrevJieQi(wholeDay: Bool = false) -> JieQi {
+    public func getPrevJieQi(wholeDay: Bool = false) -> JieQi {
         return getNearJieQi(isGoWith: false, conditions: nil, wholeDay: wholeDay)!
     }
     
-    func getNearJieQi(isGoWith: Bool, conditions: [String]?, wholeDay: Bool) -> JieQi? {
+    public func getNearJieQi(isGoWith: Bool, conditions: [String]?, wholeDay: Bool) -> JieQi? {
         var name: String?
         var near: Solar?
         var filters: [String] = []
@@ -1331,7 +1332,7 @@ public struct Lunar {
         return JieQi(name: name!, solar: near!)
     }
     
-    func getJieQi() -> String {
+    public func getJieQi() -> String {
         for  jq in jieQi {
             let d: Solar = jq.value
             if (d.year == solar!.year &&
@@ -1343,7 +1344,7 @@ public struct Lunar {
         return ""
     }
     
-    var currentJieQi: JieQi? {
+    public var currentJieQi: JieQi? {
         get {
             for jq in jieQi {
                 let d: Solar = jq.value

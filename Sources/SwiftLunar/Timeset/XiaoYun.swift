@@ -5,7 +5,7 @@
 //  Created by 睿宁 on 2022/7/19.
 //
 // 小运
-
+@available(watchOS 8.0, *)
 @available(iOS 15.0, *)
 @available(macOS 12.0, *)
 public struct XiaoYun {
@@ -42,6 +42,9 @@ public struct XiaoYun {
         self.daYun = daYun
         self.index = index
         self.isGoWith = isGoWith
+        self.year = daYun.startYear + index
+        self.age = daYun.startAge + index
+        self.lunar = daYun.lunar
     }
     
     //  XiaoYun(DaYun daYun, int index, bool forward) {
@@ -72,6 +75,16 @@ public struct XiaoYun {
         }
         offset %= size;
         return LunarUtil.JIA_ZI[offset];
+    }
+    
+    public func getGan() -> String {
+        let characters = Array(getGanZhi())
+        return String(characters[0])
+    }
+    
+    public func getZhi() -> String {
+        let characters = Array(getGanZhi())
+        return String(characters[1])
     }
     
     public func getXun() -> String {

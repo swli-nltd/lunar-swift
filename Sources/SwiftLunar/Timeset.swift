@@ -7,6 +7,7 @@
 // Timeset
 import Foundation
 
+@available(watchOS 8.0, *)
 @available(iOS 15.0, *)
 @available(macOS 12.0, *)
 public struct Timeset {
@@ -106,21 +107,35 @@ public struct Timeset {
         return LunarUtil.NAYIN[getYear()]!
     }
     
-    public func getYearShiShenGan() -> String {
+    public func getYearShiShenGan(isShort: Bool = false) -> String {
+        if (isShort) {
+            return LunarUtil.SHI_SHEN_GAN_SHORT["\(getDayGan())\(getYearGan())"]!
+        }
         return LunarUtil.SHI_SHEN_GAN["\(getDayGan())\(getYearGan())"]!
     }
     
-    public func getShiShenZhi(zhi: String) -> [String] {
+    public func getShiShenZhi(zhi: String, isShort: Bool) -> [String] {
         let hideGan: [String] = LunarUtil.ZHI_HIDE_GAN[zhi]!;
         var l: [String] = [];
         for gan in hideGan {
-            l.append(LunarUtil.SHI_SHEN_ZHI["\(getDayGan())\(zhi)\(gan)"]!)
+            if (isShort) {
+                l.append(LunarUtil.SHI_SHEN_ZHI_SHORT["\(getDayGan())\(zhi)\(gan)"]!)
+            } else {
+                l.append(LunarUtil.SHI_SHEN_ZHI["\(getDayGan())\(zhi)\(gan)"]!)
+            }
         }
         return l;
     }
     
-    public func getYearShiShenZhi() -> [String] {
-        return getShiShenZhi(zhi: getYearZhi())
+    public func getShiShenGan(stem: String, isShort: Bool) -> String {
+        if (isShort) {
+            return LunarUtil.SHI_SHEN_GAN_SHORT["\(getDayGan())\(stem)"]!
+        }
+        return LunarUtil.SHI_SHEN_GAN["\(getDayGan())\(stem)"]!
+    }
+    
+    public func getYearShiShenZhi(isShort: Bool = false) -> [String] {
+        return getShiShenZhi(zhi: getYearZhi(), isShort: isShort)
     }
     
     func getDayGanIndex() -> Int {
@@ -171,12 +186,15 @@ public struct Timeset {
         return LunarUtil.NAYIN[getMonth()]!
     }
     
-    public func getMonthShiShenGan() -> String {
+    public func getMonthShiShenGan(isShort: Bool = false) -> String {
+        if (isShort) {
+            return LunarUtil.SHI_SHEN_GAN_SHORT["\(getDayGan())\(getMonthGan())"]!
+        }
         return LunarUtil.SHI_SHEN_GAN["\(getDayGan())\(getMonthGan())"]!
     }
     
-    public func  getMonthShiShenZhi() -> [String] {
-        return getShiShenZhi(zhi: getMonthZhi())
+    public func  getMonthShiShenZhi(isShort: Bool = false) -> [String] {
+        return getShiShenZhi(zhi: getMonthZhi(), isShort: isShort)
     }
     
     public func getMonthDiShi() -> String {
@@ -211,8 +229,8 @@ public struct Timeset {
         return "日元"
     }
     
-    public func getDayShiShenZhi() -> [String] {
-        return getShiShenZhi(zhi: getDayZhi())
+    public func getDayShiShenZhi(isShort: Bool = false) -> [String] {
+        return getShiShenZhi(zhi: getDayZhi(), isShort: isShort)
     }
     
     public func getDayDiShi() -> String {
@@ -243,12 +261,15 @@ public struct Timeset {
         return LunarUtil.NAYIN[getTime()]!
     }
     
-    public func getTimeShiShenGan() -> String {
+    public func getTimeShiShenGan(isShort: Bool = false) -> String {
+        if (isShort) {
+            return LunarUtil.SHI_SHEN_GAN_SHORT["\(getDayGan())\(getTimeGan())"]!
+        }
         return LunarUtil.SHI_SHEN_GAN["\(getDayGan())\(getTimeGan())"]!
     }
     
-    public func getTimeShiShenZhi() -> [String] {
-        getShiShenZhi(zhi: getTimeZhi())
+    public func getTimeShiShenZhi(isShort: Bool = false) -> [String] {
+        getShiShenZhi(zhi: getTimeZhi(), isShort: isShort)
     }
     
     public func getTimeDiShi() -> String {

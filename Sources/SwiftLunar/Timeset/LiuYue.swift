@@ -5,10 +5,10 @@
 //  Created by 睿宁 on 2022/7/19.
 //
 // running months
-
+@available(watchOS 8.0, *)
 @available(iOS 15.0, *)
 @available(macOS 12.0, *)
-public struct LiuYue {
+public struct LiuYue: Hashable {
     /// 序数，0-9
     public var index: Int;
     
@@ -20,6 +20,12 @@ public struct LiuYue {
     }
     
     public func getGanZhi() -> String {
+        let gan: String = getGan()
+        let zhi: String = getZhi()
+        return gan + zhi;
+    }
+    
+    public func getGan() -> String {
         var offset: Int = 0;
         let yearGan: String = String(liuNian.getGanZhi().prefix(1));
         if ("甲" == yearGan || "己" == yearGan) {
@@ -32,8 +38,12 @@ public struct LiuYue {
             offset = 8
         }
         let gan: String = LunarUtil.GAN[(index + offset) % 10 + 1];
+        return gan;
+    }
+    
+    public func getZhi() -> String {
         let zhi: String = LunarUtil.ZHI[(index + LunarUtil.BASE_MONTH_ZHI_INDEX) % 12 + 1];
-        return gan + zhi;
+        return zhi;
     }
     
     public func getXun() -> String {
