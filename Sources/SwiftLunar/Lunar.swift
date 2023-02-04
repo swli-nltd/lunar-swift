@@ -146,7 +146,7 @@ public struct Lunar: Hashable {
 //        compute(lunarYear: ly)
        
         computeJieQi(lunarYear: ly)
-//        computeYear()
+        computeYear()
     }
     
     mutating func computeJieQi(lunarYear: LunarYear) { //Move to didset

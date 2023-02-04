@@ -2314,7 +2314,7 @@ public struct LunarUtil {
         return -1;
     }
     
-    static func getDayYi(monthGanZhi: String, dayGanZhi: String) -> [String] {
+    public static func getDayYi(monthGanZhi: String, dayGanZhi: String) -> [String] {
         var l: [String] = []
         let day = hex(n: getJiaZiIndex(ganZhi: dayGanZhi))
         let month = hex(n: getJiaZiIndex(ganZhi: monthGanZhi))
@@ -2353,7 +2353,7 @@ public struct LunarUtil {
         return l;
     }
     
-    static func getDayJi(monthGanZhi: String, dayGanZhi: String) -> [String] {
+    public static func getDayJi(monthGanZhi: String, dayGanZhi: String) -> [String] {
         var l: [String] = []
         let day = hex(n: getJiaZiIndex(ganZhi: dayGanZhi))
         let month = hex(n: getJiaZiIndex(ganZhi: monthGanZhi))
